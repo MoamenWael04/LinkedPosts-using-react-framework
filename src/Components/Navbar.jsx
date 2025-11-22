@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import {Navbar as HeroNavbar, NavbarBrand, NavbarContent, NavbarItem,  Button} from "@heroui/react";
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { authContext } from '../assets/Context/AuthContext';
+import icon from '../assets/groupme.png'
 
 
 export default function Navbar() {
@@ -21,6 +22,8 @@ export default function Navbar() {
   return (
     <HeroNavbar className='bg-gradient-to-r from-blue-500 to-purple-500 opacity-75 '>
       <NavbarBrand>
+        
+        <img src={icon} alt="logo" className="h-8 w-8 mr-2 bg-white p-1 rounded-xl" />
         <p className="font-bold  text-gray-200 "><Link to={"/"}>Linked-Posts</Link></p>
       </NavbarBrand>
 
