@@ -21,3 +21,19 @@ export async function signIn(userData){
         return err.response.data;
     }
 }
+
+export async function getUserDataApi(){
+    try {
+        const {data} = await axios.get('https://linked-posts.routemisr.com/users/profile-data', {
+            headers: {
+                token: localStorage.getItem('token')
+            }
+        });
+        // console.log(data);
+        
+        return data;
+    } catch (error) {
+        console.error('Error fetching posts:', error);
+        throw error;
+    }
+}

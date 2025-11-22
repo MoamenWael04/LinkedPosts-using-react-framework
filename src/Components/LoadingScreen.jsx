@@ -4,10 +4,10 @@ import { Card, Skeleton } from "@heroui/react";
 export default function LoadingScreen() {
   return (
     <>
-     <div className="bg-gray-600 p-4  mb-0.5 ">
+     <div className="bg-linear-to-l from-blue-400 to-purple-400 p-4  mb-0.5 ">
               <div className="flex justify-center">
         <Card
-          className="w-11/24 space-y-5 p-4 bg-gray-500 border border-gray-600"
+          className="w-11/24 space-y-5 p-4 bg-gray-200"
           radius="lg"
         >
           <div>
@@ -28,10 +28,10 @@ export default function LoadingScreen() {
         </Card>
       </div>
      </div>
-     <div className="bg-gray-600 p-4  mb-0.5 ">
+     <div className="bg-linear-to-l from-blue-400 to-purple-400 p-4  mb-0.5 ">
               <div className="flex justify-center">
         <Card
-          className="w-11/24 space-y-5 p-4 bg-gray-500 border border-gray-600"
+          className="w-11/24 space-y-5 p-4 bg-gray-200"
           radius="lg"
         >
           <div>
@@ -52,6 +52,7 @@ export default function LoadingScreen() {
         </Card>
       </div>
      </div>
+
 
     </>
   );

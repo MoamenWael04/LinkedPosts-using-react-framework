@@ -5,15 +5,21 @@ import { authContext } from '../assets/Context/AuthContext';
 
 
 export default function Navbar() {
-  let { isLoggedIn, setIsLoggedIn } = useContext(authContext)
+  let { isLoggedIn, setIsLoggedIn ,userData, setUserData } = useContext(authContext)
   const navigate = useNavigate();
   function logOut(){
     localStorage.removeItem('token');
     setIsLoggedIn(null)
     navigate('/login')
+    setUserData(null);
+  }
+  function profile(){
+
+    navigate('/profile')
+
   }
   return (
-    <HeroNavbar className='bg-purple-800 opacity-75 '>
+    <HeroNavbar className='bg-gradient-to-r from-blue-500 to-purple-500 opacity-75 '>
       <NavbarBrand>
         <p className="font-bold  text-gray-200 "><Link to={"/"}>Linked-Posts</Link></p>
       </NavbarBrand>
@@ -24,6 +30,9 @@ export default function Navbar() {
           <>
           <NavbarItem className='cursor-pointer  text-gray-200 ' onClick={logOut}>
           Log Out
+          </NavbarItem>
+          <NavbarItem className='cursor-pointer  text-gray-200 ' onClick={profile}>
+          Profile
           </NavbarItem>
           </> :
          <>

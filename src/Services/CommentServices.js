@@ -16,3 +16,31 @@ export async function createCommentApi(commentcontent, postId) {
     
   }
 }
+
+export async function deleteCommentApi(commentid) {
+  try {  
+    let {data} = await axios.delete("https://linked-posts.routemisr.com/comments/"+ commentid, {
+      headers: {
+        token: localStorage.getItem('token')
+      }
+    });
+    return data;
+  } catch (err) {
+    console.error('deleteCommentApi error:', err);
+    throw err; 
+  }
+}
+
+export async function UpdateCommentApi(commentid ,content) {
+  try {  
+    let {data} = await axios.put("https://linked-posts.routemisr.com/comments/"+ commentid,{content}, {
+      headers: {
+        token: localStorage.getItem('token')
+      }
+    });
+    return data;
+  } catch (err) {
+    console.error('deleteCommentApi error:', err);
+    throw err; 
+  }
+}

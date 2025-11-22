@@ -6,7 +6,7 @@ import Footer from '../Components/Footer'
 export default function MainLayout() {
   return <>
   <Navbar/>
-  <div className="bg-gray-500">
+  <div className='bg-linear-to-br from-blue-400 to-purple-400'>
     <Outlet/>
   </div>
   <Footer/>

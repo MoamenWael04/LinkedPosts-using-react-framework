@@ -5,7 +5,10 @@ export async function getAllPostsApi(){
         const {data} = await axios.get('https://linked-posts.routemisr.com/posts', {
             headers: {
                 token: localStorage.getItem('token')
-            },
+            },params:{
+                limit:15,
+                sort:'-createdAt'
+            }
         });
         return data;
     } catch (error) {
@@ -26,5 +29,39 @@ export async function getSinglePostApi(postid){
     } catch (error) {
         console.error('Error fetching posts:', error);
         throw error;
+    }
+}
+
+export async function createPostApi(formdata){
+    try {
+        const {data} = await axios.post('https://linked-posts.routemisr.com/posts', formdata ,  {
+            headers: {
+                token: localStorage.getItem('token')
+            },
+        });
+        return data;
+    } catch (error) {
+        console.error('Error fetching posts:', error);
+
+    }
+}
+
+
+
+
+export async function getPostCommentsApi(postId){
+    try {
+        const {data} = await axios.get('https://linked-posts.routemisr.com/posts/'+postId+"/comments", {
+            headers: {
+                token: localStorage.getItem('token')
+            },
+        });
+
+        return data;
+
+
+    } catch (error) {
+        console.error('Error fetching posts:', error);
+
     }
 }
