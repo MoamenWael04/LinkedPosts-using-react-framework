@@ -9,9 +9,9 @@ import { createCommentApi } from '../Services/CommentServices'
 import { authContext } from '../assets/Context/AuthContext'
 import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button} from "@heroui/react";
 import DropdownActions from './DropdownActions'
-import { getPostCommentsApi } from '../Services/PostServices'
+import { deletePostApi, getPostCommentsApi } from '../Services/PostServices'
 
-export default function PostCard({post , commentLimit }) {
+export default function PostCard({post , commentLimit , callback }) {
   const [commentContent, setCommentContent] = useState('');
   const [loading, setLoading] = useState(false);
   const [comments, setComments] = useState(post.comments);
@@ -23,8 +23,6 @@ export default function PostCard({post , commentLimit }) {
     setComments(res.comments)
   }
 
-
-
   async function createComment(e){
     e.preventDefault();
 
@@ -33,9 +31,18 @@ export default function PostCard({post , commentLimit }) {
       if (response.message === 'success') {
         setCommentContent(''); 
         setComments(response.comments)
-        // await callback(); 
+        // refresh parent if provided
+        if (typeof callback === 'function') await callback();
       }
       setLoading(false);
+
+  }
+
+  async function deletePost(){
+   const res = await deletePostApi(post._id);
+   if (res?.message === 'success') {
+    if (typeof callback === 'function') callback();
+   }
 
   }
 
@@ -52,7 +59,7 @@ export default function PostCard({post , commentLimit }) {
     {
       userData._id === post.user._id && 
 
-      <DropdownActions/>
+      <DropdownActions deletePost={deletePost}/>
 
     }
 

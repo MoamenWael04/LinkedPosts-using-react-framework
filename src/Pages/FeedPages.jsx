@@ -20,7 +20,7 @@ useEffect(()=>{
 
   <div className='w-4/6 mx-auto'>
   <CreatePost callback={getAllPosts}/>
-  {posts.length == 0 ? <LoadingScreen/> : posts.map((post) => <PostCard  commentLimit={1} post={post} key={post.id}/>)}
+  {posts.length == 0 ? <LoadingScreen/> : posts.map((post) => <PostCard callback={getAllPosts}  commentLimit={1} post={post} key={post.id}/>)}
   
   
   </div>

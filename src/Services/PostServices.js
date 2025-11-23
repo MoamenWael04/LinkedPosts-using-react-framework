@@ -65,3 +65,17 @@ export async function getPostCommentsApi(postId){
 
     }
 }
+
+export async function deletePostApi(postId) {
+  try {  
+    let {data} = await axios.delete("https://linked-posts.routemisr.com/posts/"+ postId, {
+      headers: {
+        token: localStorage.getItem('token')
+      }
+    });
+    return data;
+  } catch (err) {
+    console.error('deleteCommentApi error:', err);
+    throw err; 
+  }
+}

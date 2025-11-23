@@ -1,16 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button} from "@heroui/react";
 import { deleteCommentApi } from '../Services/CommentServices';
 
 
-export default function DropdownActions({commentId , callBack , setIsUpdating}) {
+export default function DropdownActions({commentId , callBack , setIsUpdating , deletePost}) {
+  const [isDeleting, setIsDeleting] = useState(false);
 
-async function deleteComment(commentId) {
+  // Simple delete handler: confirm, then call post-delete if provided,
+  // otherwise delete the comment and call callBack() on success.
+  async function handleDelete() {
+    if (isDeleting) return;
+
+    setIsDeleting(true);
+   
+      if (typeof deletePost === 'function') {
+        // delegate post deletion to parent; await if it returns a promise
+        await deletePost();
+        
+      }
+
+      // delete comment
+      else{
         const res = await deleteCommentApi(commentId);
-        if (res.message === 'success') {
-           await callBack();
-        }
-    }
+      if (res.message === 'success' ) {
+         await callBack();
+      } 
+      }
+    
+  }
 
 
 
@@ -24,7 +41,7 @@ async function deleteComment(commentId) {
       </DropdownTrigger>
       <DropdownMenu aria-label="Static Actions">
         <DropdownItem key="new" onClick={()=>{setIsUpdating(true) }}>Edit</DropdownItem>
-        <DropdownItem key="delete" onClick={()=> {deleteComment(commentId)}} className="text-danger" color="danger">
+        <DropdownItem key="delete" onClick={()=> { handleDelete ()}} className="text-danger" color="danger">
           Delete 
         </DropdownItem>
       </DropdownMenu>
